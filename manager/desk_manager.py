@@ -7,8 +7,6 @@ from model.writing_desk import WritingDesk
 
 
 class DeskManager:
-    # def __init__(self):
-    #     self.desks = []
 
     def __init__(self):
         self.desks: List[Desk] = []
@@ -23,24 +21,20 @@ class DeskManager:
         return iter(self.desks)
 
     def list_of_height(self):
-        print("list_of_heights")
         height_list = [desk.width for desk in self.desks]
         return height_list
 
     def indexed_list(self):
-        print("Indexed_list:")
         for index, desk in enumerate(self.desks):
             print(index + 1, desk)
 
     def numeric_list(self):
-        print("Numeric_list:")
-        for object, function in zip(self.desks, self.list_of_height()):
-            print(object, function)
+        for value, function in zip(self.desks, self.list_of_height()):
+            print(value, function)
 
     def check_condition_all_any(self, value):
-        print("All and Any:")
         all_satisfy = all(plate.width > value for plate in self.desks)
-        any_satisfy = any(plate.width > value for plate in self.desks)
+        any_satisfy = any(plate.height > value for plate in self.desks)
         return {"all": all_satisfy, "any": any_satisfy}
 
     def add_desk(self, desk):
@@ -55,4 +49,4 @@ class DeskManager:
 
     @argument_count_decorator
     def move_down(self):
-        return list(filter(lambda desk: isinstance(desk, WritingDesk) and desk.has_keyboard_tray == True, self.desks))
+        return list(filter(lambda desk: isinstance(desk, WritingDesk) and desk.has_keyboard_tray is True, self.desks))

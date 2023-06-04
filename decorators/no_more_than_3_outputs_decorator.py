@@ -10,7 +10,7 @@ def no_more_than_3_outputs_decorator(func):
         count += 1
 
         if count > 3:
-            count = 0  # Обнулення лічильника
+            count = 0
 
             raise ValueError("Too many calls")
 

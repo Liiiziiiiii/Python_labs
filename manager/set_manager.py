@@ -1,7 +1,8 @@
 """
 This is SetManager class
 """
-
+class PlateManagerException(Exception):
+    pass
 
 class SetManager:
     """A class representing a Set Manager.
@@ -36,8 +37,8 @@ class SetManager:
 
             :return: iterator: An iterator over the objects in the favorite sets.
         """
-        for desk in self.regular_manager.drone_list:
-            yield from desk.favorite_set
+        for desk in self.regular_manager.desks:
+            yield from desk.width
 
     def __len__(self):
         """
@@ -46,7 +47,7 @@ class SetManager:
             :return: int: The total length of all favorite sets combined.
         """
         total_len = 0
-        for desk in self.regular_manager.drone_list:
+        for desk in self.regular_manager.desks:
             total_len += len(desk.favorite_set)
         return total_len
 
@@ -61,7 +62,7 @@ class SetManager:
             :raises: IndexError: If the index is out of range.
         """
         count = 0
-        for desk in self.regular_manager.drone_list:
+        for desk in self.regular_manager.desks:
             if count <= index < count + len(desk.favorite_set):
                 inner_index = index - count
                 return list(desk.favorite_set)[inner_index]
